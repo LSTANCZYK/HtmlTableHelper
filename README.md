@@ -31,11 +31,11 @@ dotnet add package HtmlTableHelper
 ```C#
 using HtmlTableHelper;
 ..
-var sourceData = new[] { new { Name = "ITWeiHan", Age = "25",Sex = "Man" } };
+var sourceData = new[] { new { Name = "ITWeiHan", Age = "25",Gender = "M" } };
 var tablehtml = sourceData.ToHtmlTable();
 /*
 Result:
-<table><thead><tr><th>Name</th><th>Age</th><th>Sex</th></tr></thead><tbody><tr><td>ITWeiHan</td><td>25</td><td>Man</td></tr></tbody></table>
+<table><thead><tr><th>Name</th><th>Age</th><th>Gender</th></tr></thead><tbody><tr><td>ITWeiHan</td><td>25</td><td>M</td></tr></tbody></table>
 */
 ```
 
@@ -43,14 +43,14 @@ Result:
 ```C#
 using (var cn = "Your Connection")
 {
-	var sourceData = cn.Query(@"select 'ITWeiHan' Name,25 Age,'Man' Sex");
+	var sourceData = cn.Query(@"select 'ITWeiHan' Name,25 Age,'M' Gender");
 	var tablehtml = sourceData.ToHtmlTable();
 }
 ```
 
 ##### Dictionary Example 
 ```C#
-var sourceData = new[] {new Dictionary<string, object> (){{"Name" , "ITWeiHan" },{"Age",25},{"Sex","Man"}}};
+var sourceData = new[] {new Dictionary<string, object> (){{"Name" , "ITWeiHan" },{"Age",25},{"Gender","M"}}};
 var tablehtml = sourceData.ToHtmlTable();
 ```
 
@@ -172,9 +172,9 @@ public static class IHtmlHelperExtension
 
 razor.cshtml 
 ```C#
-@Html.ToHtmlTable(new[] { new { Name = "ITWeiHan", Age = "25", Sex = "Man" } })
+@Html.ToHtmlTable(new[] { new { Name = "ITWeiHan", Age = "25", Gender = "M" } })
 /*
-Result:<table><thead><tr><th>Name</th><th>Age</th><th>Sex</th></tr></thead><tbody><tr><td>ITWeiHan</td><td>25</td><td>Man</td></tr></tbody></table>
+Result:<table><thead><tr><th>Name</th><th>Age</th><th>Gender</th></tr></thead><tbody><tr><td>ITWeiHan</td><td>25</td><td>M</td></tr></tbody></table>
 */
 ```
 
@@ -215,7 +215,7 @@ public class HomeController : Controller
 {
     public ActionResult Index()
     {
-        var datas = new[] { new { Name = "ITWeiHan", Age = "25",Sex = "Man" } };
+        var datas = new[] { new { Name = "ITWeiHan", Age = "25",Gender = "M" } };
         ViewBag.Table = datas.ToHtmlTable();
         return View();
     }
@@ -259,7 +259,7 @@ public class Startup
     {
         app.Run(async (context) =>
         {
-            var sourceData = new[] { new { Name = "ITWeiHan", Age = "25",Sex = "Man" } };
+            var sourceData = new[] { new { Name = "ITWeiHan", Age = "25",Gender = "M" } };
             var tablehtml = sourceData.ToHtmlTable();
             await context.Response.WriteAsync(tablehtml);
         });
@@ -280,14 +280,14 @@ using HtmlTableHelper;
 public class Person{
 	public string Name { get; set; }
 	public int Age { get; set; }
-	public string Sex { get; set; }
+	public string Gender { get; set; }
 }
 ..
-var sourceData = new[] { new Person{ Name = "ITWeiHan", Age = "25",Sex = "Man" } };
+var sourceData = new[] { new Person{ Name = "ITWeiHan", Age = "25",Gender = "M" } };
 var tablehtml = sourceData.ToHtmlTable(new[]{name});
 /*
 Result:
-<table><thead><tr><th>Name</th><th>Age</th><th>Sex</th></tr></thead><tbody><tr><td>ITWeiHan</td><td>25</td><td>Man</td></tr></tbody></table>
+<table><thead><tr><th>Name</th><th>Age</th><th>Gender</th></tr></thead><tbody><tr><td>ITWeiHan</td><td>25</td><td>M</td></tr></tbody></table>
 */
 ```
 -->
